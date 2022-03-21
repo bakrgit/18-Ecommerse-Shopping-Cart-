@@ -1,4 +1,4 @@
-import { ADD_TO_CART, GET_ALL_USER_CART, UPDATE_ITEM_FROMCART, DELETE_ITEM_FROMCART, CLEAR_ALL_USER_CART } from '../type'
+import { ADD_TO_CART,APPALY_COUPON_CART, GET_ALL_USER_CART, UPDATE_ITEM_FROMCART, DELETE_ITEM_FROMCART, CLEAR_ALL_USER_CART } from '../type'
 import { useGetData, useGetDataToken } from '../../hooks/useGetData'
 import { useInsertData } from '../../hooks/useInsertData';
 import useDeleteData from './../../hooks/useDeleteData';
@@ -25,7 +25,7 @@ export const addProductToCart = (body) => async (dispatch) => {
 export const getAllUserCartItems = () => async (dispatch) => {
     try {
         const response = await useGetDataToken(`/api/v1/cart`);
-        //console.log(response)
+        console.log(response)
         dispatch({
             type: GET_ALL_USER_CART,
             payload: response,
@@ -77,7 +77,7 @@ export const deleteCartItem = (id) => async (dispatch) => {
 export const updateCartItem = (id, body) => async (dispatch) => {
     try {
         const response = await useInsUpdateData(`/api/v1/cart/${id}`, body);
-        console.log(response)
+        //  console.log(response)
         dispatch({
             type: UPDATE_ITEM_FROMCART,
             payload: response,
@@ -86,6 +86,25 @@ export const updateCartItem = (id, body) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: UPDATE_ITEM_FROMCART,
+            payload: e.response,
+        })
+    }
+}
+
+
+//update cart Item
+export const applayCoupnCart = (body) => async (dispatch) => {
+    try {
+        const response = await useInsUpdateData(`/api/v1/cart/applyCoupon`, body);
+       // console.log(response)
+        dispatch({
+            type: APPALY_COUPON_CART,
+            payload: response,
+        })
+
+    } catch (e) {
+        dispatch({
+            type: APPALY_COUPON_CART,
             payload: e.response,
         })
     }

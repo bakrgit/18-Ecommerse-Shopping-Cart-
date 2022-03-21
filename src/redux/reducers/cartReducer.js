@@ -1,11 +1,12 @@
-import { ADD_TO_CART, UPDATE_ITEM_FROMCART, GET_ALL_USER_CART, DELETE_ITEM_FROMCART, CLEAR_ALL_USER_CART } from '../type'
+import { ADD_TO_CART, APPALY_COUPON_CART, UPDATE_ITEM_FROMCART, GET_ALL_USER_CART, DELETE_ITEM_FROMCART, CLEAR_ALL_USER_CART } from '../type'
 
 const inital = {
     addToCart: [],
     getAllUserCart: [],
     clearCart: [],
     deleteItem: [],
-    updateItem: []
+    updateItem: [],
+    applayCoupon: [],
 }
 const cartReducer = (state = inital, action) => {
     switch (action.type) {
@@ -33,6 +34,11 @@ const cartReducer = (state = inital, action) => {
             return {
                 ...state,
                 updateItem: action.payload,
+            }
+        case APPALY_COUPON_CART:
+            return {
+                ...state,
+                applayCoupon: action.payload,
             }
         default:
             return state;
